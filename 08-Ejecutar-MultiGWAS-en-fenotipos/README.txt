@@ -1,0 +1,1 @@
+El proceso se hizo para dos grupos de datos: una con todos los datos y otra eliminado los datos outliers, sin embargo se habia discutido que eliminar los outliers no tenía mucho sentido ya que entre esos outliers podrían estar marcadores de interés.

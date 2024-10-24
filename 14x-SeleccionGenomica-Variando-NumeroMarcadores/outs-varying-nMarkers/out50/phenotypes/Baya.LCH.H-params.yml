@@ -1,0 +1,9 @@
+trainingGenoFile  : phenotypes/Baya.LCH.H-trainingGeno.csv
+trainingPhenoFile : phenotypes/Baya.LCH.H-trainingPheno.csv
+targetGenoFile    : phenotypes/Baya.LCH.H-targetGeno.csv
+targetPhenoFile   : phenotypes/Baya.LCH.H-targetPheno.csv
+phenoName         : Baya.LCH.H
+methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes            : 2
+nFolds            : 3
+nCores            : 3

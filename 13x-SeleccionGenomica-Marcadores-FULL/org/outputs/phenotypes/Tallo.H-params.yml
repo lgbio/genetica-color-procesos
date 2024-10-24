@@ -1,0 +1,9 @@
+trainingGenoFile  : training-geno-TRAINING.csv
+trainingPhenoFile : phenotypes/Tallo.H-trainingPheno.csv
+targetGenoFile    : target-geno-TARGET.csv
+targetPhenoFile   : phenotypes/Tallo.H-targetPheno.csv
+phenoName         : Tallo.H
+methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS LASSO RR SVM RF
+nTimes            : 5
+nFolds            : 5
+nCores            : 4

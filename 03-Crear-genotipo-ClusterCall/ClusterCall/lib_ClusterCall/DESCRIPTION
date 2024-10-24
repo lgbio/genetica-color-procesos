@@ -1,0 +1,16 @@
+Package: ClusterCall
+Title: Genotype Assignment for Autotetraploids
+Version: 1.6
+Author: Cari A. Schmitz Carley, Jeffrey B. Endelman
+Maintainer: Jeffrey Endelman <endelman@wisc.edu>
+Description: Generates genotypes for autotetraploid samples from SNP marker
+    array intensity data for biparental and arbitrary populations.
+Depends: R (>= 3.2.2)
+Imports: MASS (>= 7.3-45), methods
+Suggests: parallel, fitTetra, reshape
+License: GPL-3
+URL: http://potatobreeding.cals.wisc.edu/software
+Encoding: UTF-8
+LazyData: true
+NeedsCompilation: no
+Packaged: 2017-08-16 16:27:45 UTC; cari

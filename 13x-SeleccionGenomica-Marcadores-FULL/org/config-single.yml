@@ -1,0 +1,9 @@
+trainingGenoFile  : ./training-geno.csv  # Obligatory file
+trainingPhenoFile : ./training-pheno.csv # Obligatory file
+targetGenoFile    : ./target-geno.csv    # Obligatory file
+targetPhenoFile   : ./target-pheno.csv   # Optional file 
+phenoName : PriFlor.LCH.H         # Name of the phenotype 
+methods   : BA BB # Models to test, the complete models are : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes    : 1     # Number of times for cross validation, use 5 or more for better results (take long time)
+nFolds    : 2     # Number of folds for cross validation, use 5 or more for better results (take long time)
+nCores    : 4     # Number of processing cores for GS, it dependes of the machine where it is running

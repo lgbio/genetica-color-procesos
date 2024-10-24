@@ -1,0 +1,9 @@
+trainingGenoFile  : geno-training-TRAINING.csv
+trainingPhenoFile : phenotypes/SecTuber.LCH.C-trainingPheno.csv
+targetGenoFile    : geno-target-TARGET.csv
+targetPhenoFile   : phenotypes/SecTuber.LCH.C-targetPheno.csv
+phenoName         : SecTuber.LCH.C
+methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes            : 2
+nFolds            : 3
+nCores            : 4

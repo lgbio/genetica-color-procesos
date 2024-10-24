@@ -1,0 +1,10 @@
+Trait.name,NewName.Periodo1,NewName.Periodo2,OriginalName.P1,Original.Name.P2
+Color Tallo,CTallo,CT,xCTallo,xCT
+Color Primario Flor,CPFlor,CPF,xCPFlor,xCPF
+Color Baya,CBaya,CB,xCBaya,xCB
+Color Primario Tuberculo,CPTuber,CPT,xCPTuber,xCPT
+Color Secudario Tuberculo,CSTuber,CST,xCSTuber,xCST
+Color Primario Pulpa,CPulpa,CPC,xCPulpa,xCPC
+Color Secundario Pulpa,CSPulpa,CSC,xCSPulpa,xCSC
+Color Primario Brote,CPBrote,CPB,xCPBrote,xCPB
+Color Secundario Brote,CSBrote,CSB,xCSBrote,xCSB

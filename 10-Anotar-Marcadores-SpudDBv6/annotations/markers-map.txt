@@ -1,0 +1,1 @@
+solcap_69k_SNPs_DM_v6_1_pos.txt

@@ -1,0 +1,75 @@
+Changes in 1.6
+* fixed inspect.marker to not circle parents of F1 populations when they also appear in the prediction set
+
+Changes in 1.5
+* changed CC.anypop to allow markers called in the training set to be absent in the prediction set
+* added max.missing.theta threshold to read.pop
+* expanded language describing action of min.train=NULL
+* add function usefitT
+* changed inspect.marker naming convention for titles at tops of figures
+* changed CC.anypop to name @pops “diverse” when parent1=NA (for fitTetra scores)
+
+Changes in 1.4
+* added impute option to CC.anypop
+
+Changes in 1.3
+* eliminated max.outlier.progeny parameter, as it proved unnecessary
+* changes to calculation of posterior probability (.bayes.check, .fit.dist)
+* changes to prevent lumping of prediction set clusters without training set genotypes
+* implemented chi2p.step
+* changes to allow selfing population to CC.bipop, CC.anypop, and inspect.marker
+
+Changes in 1.2
+* return NA for marker p(chi2) if categories other than expected DR products found
+* no longer require that all expected categories have > 0 samples for CC.bipop
+* hom.theta parameter now serves as boundary in two directions (i.e., homozygotes on one side, heterozygotes on other side)
+* dosage to cluster assignment no longer allows for “gaps” in the sequence
+
+Changes in 1.1
+* read.pop - all samples must have unique sample names
+* CC.anypop concordance, theta, and geno to include all markers that were supplied (NAs for those not used)
+* corrections to .biparental.call function to call AAAA x BBBB -> AABB markers
+* min.train parameter added to CC.bipop and CC.anypop
+* changes to alter.pop keep=xxx, return pops, and inspect.marker to handle length(pop)==1
+
+Changes in 1.0:
+* Citation added, posted online
+* error.checking=F default in read.pop
+* inspect.marker vertical line placement fixed
+* fixed indexing in CC.anypop@pops
+
+Changes in 0.99
+* edits to manual, add links
+* alter.pop combines pops, removes/retains samples, merges samples
+
+Changes in 0.98
+* fix write.CC to write.pop <- the right name
+* combine qc.pop and combine.pop, if it gets more than one pop, combines them
+* bipop and anypop inherit pop
+* changed read.pop to initiate a r matrix even if r.file=NULL, easier for merging ‘pop’ objects later
+
+Changes in 0.97
+* add a write.CC function to write genotype matrix
+* rename conc.plot to plot.CC
+
+Changes in 0.96
+* add identical sample names warning to combine.pops, takes first sample if names appear more than once
+
+Changes in 0.95
+* rename parameter max.width to max.range
+
+Changes in 0.94:
+* can’t use ‘which’ to create index of populations for CC.anypop@pops because some genotypes may be represented 2x, fixed CC.anypop creation of ‘pops’
+* in identity.plot and id.plot and CC.anypop changed ‘identity’ to ‘concordance’, rename id.plot as conc.plot
+
+Changes in 0.93:
+* changed wording ’matches’ to ‘equivalent’ in classes and read.pop
+* changes to ‘combine.pops’ to record pop type
+* changes to inspect.marker to take a list of pops/anypops, add names and vertical dashed lines between populations
+* change wording ‘max.range’ to ‘max.width’ in CC.anypop, CC.bipop, optimize.params, auxiliary.functions 
+
+Changes in 0.92:
+* qc.pop defines r when eliminating samples
+
+Changes in 0.91:
+* inspect.marker now plots red dots for non-genotyped samples

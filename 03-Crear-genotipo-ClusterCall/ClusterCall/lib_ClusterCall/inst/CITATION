@@ -1,0 +1,11 @@
+citHeader("To cite the ClusterCall package in publications, please use")
+
+citEntry(entry="Article",
+	title="Automated tetraploid genotype calling by hierarchical clustering", 
+	author=personList(as.person("C. A. Schmitz Carley"), as.person("J. J. Coombs"), as.person("D. S. Douches"), as.person("P. C. Bethke"), as.person("J. P. Palta"), as.person("R. G. Novy"), as.person("J. B. Endelman")),
+	year= 2017,
+	journal="Theoretical and Applied Genetics",
+	volume=" ",
+	pages=" ",
+	textVersion="Schmitz Carley CA, Coombs JJ, Douches DS, Bethke PC, Palta JP, Novy RG, Endelman JB (2017) Automated tetraploid genotype calling by hierarchical clustering. Theoretical and Applied Genetics 130:717–726 DOI: 10.1007/s00122-016-2845-5."
+)
