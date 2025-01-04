@@ -6,7 +6,7 @@ Update genotipe file with new chromosomal positions from genome v6.1"
 
 INPUTGENO  = "inputs/genotipo-AndigenaCCC-ClusterCall2020-ACGT.csv"
 INPUTMAP   = "inputs/solcap_69k_SNPs_DM_v6_1_pos.txt"
-OUTPUTFILE = "outputs/out-genotipo-AndigenaCCC-ClusterCall2023-ACGT.csv"
+OUTPUTFILE = "outputs/genotipo-AndigenaCCC-ClusterCall2023-ACGT.csv"
 
 geno = read.csv (INPUTGENO, check.names=F); #view (geno)
 map  = read.csv (INPUTMAP, sep="\t"); #view (map)

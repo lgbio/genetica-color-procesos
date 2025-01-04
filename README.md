@@ -1,6 +1,7 @@
 # Pasos y scripts del trabajo con AGROSAVIA de genética del color en papa.
 
 ## LOG
+Ene/01: r0.2 : Corregido Heredabilidad. MultiGWAS con 3 Tools (No Shesis).
 Oct/26: r0.1 : Version Inicial de los pasos, revisados hasta el 11
 
 ## Indicaciones

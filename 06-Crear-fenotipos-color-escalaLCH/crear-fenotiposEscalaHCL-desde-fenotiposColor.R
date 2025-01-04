@@ -19,8 +19,8 @@ inRHSValues      = "inputs/out-colors-RHSValues-BaseTraits.csv"
 inBaseTraitNames = "inputs/out-colors-BaseShortNames.csv"
 inBaseTraitNames = "inputs/trait-color-ColumNames.csv"
 
-outPotatoHCLPhenos = "outputs/out-fenotiposColor-ComponentesLCH.csv"
-outSummaryTraits   = "outputs/out-summary-TraitNames.csv"
+outPotatoHCLPhenos = "outputs/fenotiposColor-ComponentesLCH.csv"
+outSummaryTraits   = "outputs/summary-TraitNames.csv"
 createDir ("outputs")
 
 #----------------------------------------------------------
