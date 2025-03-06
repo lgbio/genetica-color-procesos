@@ -1,0 +1,9 @@
+trainingGenoFile  : training-geno-TRAINING.csv
+trainingPhenoFile : phenotypes/CPTuber.L-trainingPheno.csv
+targetGenoFile    : target-geno-TARGET.csv
+targetPhenoFile   : phenotypes/CPTuber.L-targetPheno.csv
+phenoName         : CPTuber.L
+methods           : BA BB
+nTimes            : 1
+nFolds            : 2
+nCores            : 3

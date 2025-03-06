@@ -1,9 +1,0 @@
-trainingGenoFile  : training-geno-TRAINING.csv
-trainingPhenoFile : phenotypes/CSPulpa.C-trainingPheno.csv
-targetGenoFile    : target-geno-TARGET.csv
-targetPhenoFile   : phenotypes/CSPulpa.C-targetPheno.csv
-phenoName         : CSPulpa.C
-methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS LASSO RR SVM RF
-nTimes            : 2
-nFolds            : 2
-nCores            : 4

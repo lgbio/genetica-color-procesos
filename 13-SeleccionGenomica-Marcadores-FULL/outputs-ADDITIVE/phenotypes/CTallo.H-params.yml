@@ -1,0 +1,9 @@
+trainingGenoFile  : training-geno-TRAINING.csv
+trainingPhenoFile : phenotypes/CTallo.H-trainingPheno.csv
+targetGenoFile    : target-geno-TARGET.csv
+targetPhenoFile   : phenotypes/CTallo.H-targetPheno.csv
+phenoName         : CTallo.H
+methods           : BA BB
+nTimes            : 1
+nFolds            : 2
+nCores            : 3

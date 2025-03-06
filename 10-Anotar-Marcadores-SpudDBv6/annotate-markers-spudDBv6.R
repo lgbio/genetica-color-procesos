@@ -25,8 +25,8 @@ library (stringi)
 library (dplyr)
 warnings()
 
-INPUT_01 = "inputs/SNPs-GSCORES-ALL-ADDITIVE-TRAITS-BASE.csv"
-INPUT_02 = "inputs/SNPs-GSCORES-ALL-ADDITIVE-TRAITS-HCL.csv"
+INPUT_01 = "inputs/SNPs-GSCORES-ALL-3TOOLS-TRAITS-BASE.csv"
+INPUT_02 = "inputs/SNPs-GSCORES-ALL-3TOOLS-TRAITS-HCL.csv"
 createDir ("outputs")
 
 main <- function () {

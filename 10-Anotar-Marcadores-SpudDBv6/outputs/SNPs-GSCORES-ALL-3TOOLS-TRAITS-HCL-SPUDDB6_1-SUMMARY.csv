@@ -1,0 +1,16 @@
+"GSCORE","SNP","CHROM","POS","TRAIT","ANNOT"
+"0.982","c1_5483","chr08","57177039","CBaya.H","Neprosin"
+"0.966","c1_7964","chr02","38139240","CPFlor.C","NAD dependent epimerase/dehydratase family"
+"0.966","c2_12720","chr07","54318643","CPFlor.C","Ribulose-phosphate 3-epimerase-like"
+"0.955","c2_21934","chr04","5765944","CSBrote.C","OCRE domain"
+"0.951","c2_51974","chr08","2472934","CSBrote.C","RNA recognition motif. (a.k.a. RRM, RBD, or RNP domain)"
+"0.954","c1_8194","chr03","55211205","CPFlor.L","Signal recognition particle SRP54, helical bundle"
+"0.947","c1_7874","chr02","43712601","CPulpa.C","Bacterial/plant glycogen synthase"
+"0.947","c2_14491","chr01","67248400","CPulpa.C","Eukaryotic translation initiation factor 3 subunit H"
+"0.938","c1_5936","chr11","28989434","CPBrote.L","Spore Coat Polysaccharide Biosynthesis Protein SpsA; Chain A"
+"0.938","c1_5940","chr11","29258142","CPBrote.L","Leucine-rich repeat domain superfamily"
+"0.938","c1_11237","chr11","13277951","CPBrote.L","D-isomer specific 2-hydroxyacid dehydrogenase, NAD-binding domain"
+"0.923","c2_47202","chr02","44641059","CPulpa.L","Helicase conserved C-terminal domain"
+"0.917","c2_32702","chr08","1899939","CPFlor.H","Glucose/ribitol dehydrogenase family signature"
+NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA

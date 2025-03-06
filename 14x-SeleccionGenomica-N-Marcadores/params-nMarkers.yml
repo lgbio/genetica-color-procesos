@@ -1,0 +1,9 @@
+trainingGenoFile    	: C:\Users\lgarr\agrosavia\nmarkers\run-3Tools-AllMethods\datasets\training-geno.csv
+trainingPhenoFile   	: C:\Users\lgarr\agrosavia\nmarkers\run-3Tools-AllMethods\datasets\training-pheno.csv
+targetGenoFile      	: C:\Users\lgarr\agrosavia\nmarkers\run-3Tools-AllMethods\datasets\target-geno.csv
+targetPhenoFile     	: C:\Users\lgarr\agrosavia\nmarkers\run-3Tools-AllMethods\datasets\target-pheno.csv
+nMarkers			: 100
+methods             : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes              : 3 #5 
+nFolds              : 3 #5 
+nCores              : 1 # Number of processing cores

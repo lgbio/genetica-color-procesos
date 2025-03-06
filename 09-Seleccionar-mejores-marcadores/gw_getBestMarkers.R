@@ -7,34 +7,38 @@ source ("gw_scoreMarkers.R")
 warnings()
 	
 #-------------------------------------------------------------
+# Best markers for both base and HCL traits
+# For each trait N best markers are selected
 # Create manhattan plots for top best markers and 
-# best markers by both base and HCL traits
 #-------------------------------------------------------------
 
-INPUT_01 = "inputs/SNPs-GSCORES-ALL-ADDITIVE.csv"
-#INPUT_02 = "inputs/SNPs-GSCORES-ALL-ADDITIVE-noOUTLIERS.csv"
-
+INPUT = "inputs/SNPs-GSCORES-ALL-3TOOLS.csv"
+NBEST = 200              # 50 Best markers for each trait
 
 main <- function () {
-    doAnalysis (INPUT_01)
-    #doAnalysis (INPUT_02)
+    doAnalysis (INPUT)
 }
 
 doAnalysis <- function (inputData) {
+    createDir ("outputs")
 #reload (pkgload::inst("gwascolors"))
 	#markersFile = "inouts/SNPs-GSCORES-ALL-ADDITIVE.csv"
 	markersFile = inputData
 	markersFile = addBaseTraits (markersFile)
 
-	# Best significative for base traits
-	outFile = gsub (".csv", "-BASE.csv", markersFile)
-	bestByTraitBaseFile = gw_bestMarkersTraits (markersFile, 0.9, "BASE", outFile)
-	plotBestSNPsByTrait (bestByTraitBaseFile, "BASE")
+    # Best N
+	gw_bestMarkersTraits (markersFile, NBEST, "BASE")
 
-	# Best significative for HCL traits
-	outFile = gsub (".csv", "-HCL.csv", markersFile)
-	bestByTraitBaseFile = gw_bestMarkersTraits (markersFile, 0.9, "TRAIT", outFile)
-	plotBestSNPsByTrait (bestByTraitBaseFile, "TRAIT")
+    # Best one for plotting
+	bestOneFile = gw_bestMarkersTraits (markersFile, 1, "BASE")
+	plotBestSNPsByTrait (bestOneFile, "BASE")
+
+	# Best N
+	gw_bestMarkersTraits (markersFile, NBEST, "TRAIT")
+    # Best one for Plotting
+	bestOneFile = gw_bestMarkersTraits (markersFile, 1, "TRAIT")
+	plotBestSNPsByTrait (bestOneFile, "TRAIT")
+    #-----------------------------------------------------------------------------
 
 	# Manhattan plot for top 1000 and labels for 20
 	topFile        = gw_getTopNBestMarkers (markersFile, 1000)
@@ -67,24 +71,32 @@ addBaseTraits <- function (markersFile) {
 #' Best markers are selected by trait: first, each of the four tools selects its N=50 best markers, low p-value, resulting in M=200 markers for each phenotype. These markers are scored with our "AgroScore" and the best N=50 markers are selected.
 #'
 #' @param  markersFile Filename of GWAS results.
-#' @param  GVALUE      Minimal GSCORE value for SNP.
+#' @param  nBest       Numbers of best SNPs for each trait.
 #' @param  TRAITTYPE   Type of trait to get best markers.
 #' @param  outFile     Filename of resulting output file.
 #' @return Table with best N markers for each trait. 
 #' @export
 #-------------------------------------------------------------
-gw_bestMarkersTraits <- function (markersFile, GVALUE, TRAITTYPE, outFile) {
-	message ("Getting best markers for ", TRAITTYPE, " traits...")
+gw_bestMarkersTraits <- function (markersFile, nBest, TRAITTYPE) {
+    nSuffix = sprintf ("-BEST-N%.2d-%s.csv", nBest, TRAITTYPE)
+	outFile = gsub (".csv", nSuffix, markersFile)
+
+	message ("Getting best N=", nBest, " markers for ", TRAITTYPE, " traits...")
 	markers    = read.csv (markersFile); #view (markers,m=0)
 
 	traitNames = unique (markers[,c(TRAITTYPE)])
 	bestMarkersTable = NULL
-	for (trait in traitNames) {
-		scoresTrait = filter (markers, !!sym(TRAITTYPE)==trait);#view (scoresTrait)
-		uniqueMarkers  = distinct (scoresTrait, SNP, .keep_all=T)
-		bestMarkers    = filter (uniqueMarkers, SIGNIFICANCE==T & GSCORE > GVALUE)
-		bestMarkersTable = rbind (bestMarkersTable, bestMarkers)
-	}
+#	for (trait in traitNames) {
+#		scoresTrait = filter (markers, !!sym(TRAITTYPE)==trait);#view (scoresTrait)
+#		uniqueMarkers  = distinct (scoresTrait, SNP, .keep_all=T);view (uniqueMarkers)
+#		bestMarkers    = filter (uniqueMarkers, SIGNIFICANCE==T & GSCORE > GVALUE)
+#		bestMarkersTable = rbind (bestMarkersTable, bestMarkers)
+#	}
+
+    bestMarkersTable = markers %>% 
+        group_by (!!sym(TRAITTYPE)) %>% 
+        slice_max (GSCORE, n=nBest, with_ties=F) %>% 
+        ungroup ()
 
     outFile = gsub ("inputs", "outputs", outFile)
 	write.csv (bestMarkersTable, outFile, row.names=F)
@@ -203,7 +215,7 @@ plotBestSNPsByTrait <- function (markersFile, TRAITTYPE) {
 	    theme_bw() + theme(legend.position="none",
 	      panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank(),
 	      panel.border = element_rect(colour = "black", fill=NA)) +
-        labs (title="Best Significant SNPs by trait", y=yLabel, x="CHROMOSOME")
+        labs (title="Best SNP by trait", y=yLabel, x="CHROMOSOME")
     outFile = gsub ("inputs", "outputs", outFile)
 	ggsave (outFile, width=7, height=4)
 }
