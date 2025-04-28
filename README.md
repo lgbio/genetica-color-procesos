@@ -1,9 +1,10 @@
 # Pasos y scripts del trabajo con AGROSAVIA de genética del color en papa.
 
 ## LOG
-Mar/06: r0.3 : Creados scrips selección genómica variando número de marcadores
-Ene/01: r0.2 : Corregido Heredabilidad. MultiGWAS con 3 Tools (No Shesis).
-Oct/26: r0.1 : Version Inicial de los pasos, revisados hasta el 11
+Mar/28: r0.31 : Filtrado dos traits en Plots de variación de marcadores. Cambiado background a blanco
+Mar/06: r0.3  : Creados scrips selección genómica variando número de marcadores
+Ene/01: r0.2  : Corregido Heredabilidad. MultiGWAS con 3 Tools (No Shesis).
+Oct/26: r0.1  : Version Inicial de los pasos, revisados hasta el 11
 
 ## Indicaciones
 - Están ya revisados los pasos hasta el 11 (Los que tienen "x" todavia no)

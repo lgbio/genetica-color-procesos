@@ -1,0 +1,9 @@
+trainingGenoFile  : phenotypes/PriTuber.LCH.C-trainingGeno.csv
+trainingPhenoFile : phenotypes/PriTuber.LCH.C-trainingPheno.csv
+targetGenoFile    : phenotypes/PriTuber.LCH.C-targetGeno.csv
+targetPhenoFile   : phenotypes/PriTuber.LCH.C-targetPheno.csv
+phenoName         : PriTuber.LCH.C
+methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes            : 2
+nFolds            : 3
+nCores            : 3

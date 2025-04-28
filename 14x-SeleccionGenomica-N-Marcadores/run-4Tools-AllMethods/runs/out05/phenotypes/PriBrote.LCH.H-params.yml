@@ -1,9 +1,0 @@
-trainingGenoFile  : phenotypes/PriBrote.LCH.H-trainingGeno.csv
-trainingPhenoFile : phenotypes/PriBrote.LCH.H-trainingPheno.csv
-targetGenoFile    : phenotypes/PriBrote.LCH.H-targetGeno.csv
-targetPhenoFile   : phenotypes/PriBrote.LCH.H-targetPheno.csv
-phenoName         : PriBrote.LCH.H
-methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
-nTimes            : 2
-nFolds            : 3
-nCores            : 3

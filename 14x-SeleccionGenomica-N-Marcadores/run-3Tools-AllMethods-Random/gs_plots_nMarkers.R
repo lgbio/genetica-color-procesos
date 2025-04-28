@@ -1,1 +1,0 @@
-/home/lg/BIO/agrosavia/genetica-color-procesos/14x-SeleccionGenomica-Variando-NumeroMarcadores/gs_plots_nMarkers.R

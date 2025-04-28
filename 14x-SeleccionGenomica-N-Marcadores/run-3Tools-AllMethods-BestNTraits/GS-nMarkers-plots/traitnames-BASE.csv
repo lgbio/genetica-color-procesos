@@ -1,0 +1,9 @@
+CTallo,StemC ,stem color
+CBaya,BerryC ,berry color
+CPFlor,PCFlower ,primary flower color
+CPTuber,PCTuberskin ,primary tuber skin color
+CSTuber,SCTuberskin ,secondary tuber skin color
+CPulpa,PCTuberflesh ,primary tuber flesh color
+CSPulpa,SCTuberflesh ,secondary tuber flesh color
+CPBrote,PCSprout,primary sprout color
+CSBrote,SCSprout,secondary sprout color

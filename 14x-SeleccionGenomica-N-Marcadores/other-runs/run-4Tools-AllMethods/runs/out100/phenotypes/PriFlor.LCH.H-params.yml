@@ -1,0 +1,9 @@
+trainingGenoFile  : geno-training-TRAINING.csv
+trainingPhenoFile : phenotypes/PriFlor.LCH.H-trainingPheno.csv
+targetGenoFile    : geno-target-TARGET.csv
+targetPhenoFile   : phenotypes/PriFlor.LCH.H-targetPheno.csv
+phenoName         : PriFlor.LCH.H
+methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes            : 2
+nFolds            : 3
+nCores            : 4

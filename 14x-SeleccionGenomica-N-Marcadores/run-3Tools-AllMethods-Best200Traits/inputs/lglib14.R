@@ -1,1 +1,0 @@
-/home/lg/BIO/agrosavia/genetica-color-procesos/14x-SeleccionGenomica-N-Marcadores/run-3Tools-AllMethods-BestTraits/lglib14.R

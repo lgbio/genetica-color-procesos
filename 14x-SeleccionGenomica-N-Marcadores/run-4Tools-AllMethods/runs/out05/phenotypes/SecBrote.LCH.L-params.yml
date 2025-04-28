@@ -1,9 +1,0 @@
-trainingGenoFile  : phenotypes/SecBrote.LCH.L-trainingGeno.csv
-trainingPhenoFile : phenotypes/SecBrote.LCH.L-trainingPheno.csv
-targetGenoFile    : phenotypes/SecBrote.LCH.L-targetGeno.csv
-targetPhenoFile   : phenotypes/SecBrote.LCH.L-targetPheno.csv
-phenoName         : SecBrote.LCH.L
-methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
-nTimes            : 2
-nFolds            : 3
-nCores            : 3

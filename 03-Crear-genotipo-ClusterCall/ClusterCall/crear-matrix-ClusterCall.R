@@ -25,7 +25,7 @@ load_all("lib_ClusterCall")
 #source ("lglib09.R")
 
 NCORES = 4
-DEBUG  = TRUE
+DEBUG  = FALSE
 
 #---- INPUTS ----
 #---- Input trainig datasets ----------
@@ -39,8 +39,8 @@ if (DEBUG==FALSE) {
 	ratioThetasFile = paste0 (TRAINING_DIR, "ratios-thetas-papa-andigena-REGISTROS.csv")  # Toy markers data, only for testing the script
 }
 
-training_thetaFiles = paste0 (TRAINING_DIR, c ("AxS_theta.csv.gz", "RGxP_theta.csv.gz", "WxL_theta.csv.gz"))
-training_radioFiles = paste0 (TRAINING_DIR, c ("AxS_r.csv.gz", "RGxP_r.csv.gz", "WxL_r.csv.gz"))
+training_thetaFiles = paste0 (TRAINING_DIR, c ("AxS_theta.csv", "RGxP_theta.csv", "WxL_theta.csv"))
+training_radioFiles = paste0 (TRAINING_DIR, c ("AxS_r.csv", "RGxP_r.csv", "WxL_r.csv"))
 
 #---- OUTPUT FILE ----
 OUTPUTFILEGENO = "outputs/genotipo-AndigenaCCC-ClusterCall.csv"
@@ -72,6 +72,15 @@ trainPredictGenotypes <- function (ratioThetasFile, training_thetaFiles, trainin
 	fun_readPop <- function (inputFilesItem) {
 		tFile = inputFilesItem [1]
 		rFile = inputFilesItem [2]
+        message (">>> tFile: ", tFile)
+        message (">>> rFile: ", rFile)
+        theta = read.csv (tFile)
+        r     = read.csv (rFile)
+
+        cnt = colnames(theta); cnr = colnames(r); rnt = rownames(theta); rnr =  rownames(r);
+
+        message (">>> cnt: ", length (cnt), " crn: ", length (cnr), " rnt: ", length (rnt), " rnr: ", length (rnr))
+
 		out <- read.pop(theta.file = tFile, r.file = rFile, error.checking=F)
 	}
 

@@ -1,0 +1,9 @@
+trainingGenoFile  : phenotypes/Pulpa.LCH.C-trainingGeno.csv
+trainingPhenoFile : phenotypes/Pulpa.LCH.C-trainingPheno.csv
+targetGenoFile    : phenotypes/Pulpa.LCH.C-targetGeno.csv
+targetPhenoFile   : phenotypes/Pulpa.LCH.C-targetPheno.csv
+phenoName         : Pulpa.LCH.C
+methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS
+nTimes            : 2
+nFolds            : 3
+nCores            : 3

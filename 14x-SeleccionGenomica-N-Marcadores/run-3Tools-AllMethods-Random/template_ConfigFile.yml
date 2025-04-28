@@ -1,9 +1,0 @@
-trainingGenoFile    : training-geno.csv
-trainingPhenoFile   : training-pheno.csv
-targetGenoFile      : target-geno.csv
-targetPhenoFile     : target-pheno.csv
-nMarkers            : # 100 or 1000 or 2000 ...
-methods             : BA BB BC BL BRR GBLUP EGBLUP RKHS
-nTimes              : 3 #5 
-nFolds              : 3 #5 
-nCores              : 1 # Number of processing cores
