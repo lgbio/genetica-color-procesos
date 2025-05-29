@@ -17,14 +17,20 @@ INFO="
 # OUTPUT: - One file with predictions only for the population
 # AUTHOR: Luis Garreta (2020) (lgarreta@gmail.com)
 
+#------------------- For calling from a renv environment -------------------------------------------------
+Sys.setenv(RENV_PROJECT = "/home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores")
+source(file.path(Sys.getenv("RENV_PROJECT"), "renv/activate.R"))
+#---------------------------------------------------------------------------------------------------------
+
 # Load libraries and set global parameters
 library (parallel)
 library (devtools)
 load_all("lib_ClusterCall")
 
+
 #source ("lglib09.R")
 
-NCORES = 4
+NCORES = 8
 DEBUG  = FALSE
 
 #---- INPUTS ----
@@ -33,18 +39,18 @@ markersInfoFile = "inputs/mappinginfo-markers-Berdugo2018.csv" # Input markers i
 #---- Input training datasets and ratios file ----
 if (DEBUG==FALSE) {
 	TRAINING_DIR="training-datasets/"           # Real training dir
-	ratioThetasFile = "inputs/ratios-thetas-papa-andigena-REGISTROS.csv" # Real markers dataset (markers X individuals)
 }else { # Only for testing
 	TRAINING_DIR="training-datasets/samples50/"     # Toy datasets, only for testing the script
-	ratioThetasFile = paste0 (TRAINING_DIR, "ratios-thetas-papa-andigena-REGISTROS.csv")  # Toy markers data, only for testing the script
 }
+ratioThetasFile = paste0 (TRAINING_DIR, "ratios-thetas-papa-andigena-REGISTROS.csv")  # Toy markers data, only for testing the script
 
 training_thetaFiles = paste0 (TRAINING_DIR, c ("AxS_theta.csv", "RGxP_theta.csv", "WxL_theta.csv"))
 training_radioFiles = paste0 (TRAINING_DIR, c ("AxS_r.csv", "RGxP_r.csv", "WxL_r.csv"))
 
 #---- OUTPUT FILE ----
-OUTPUTFILEGENO = "outputs/genotipo-AndigenaCCC-ClusterCall.csv"
-OUTPUTFILEMATRIX = "outputs/out-predictions-clusterCall2020-MATRIX.csv"
+OUTPUTFILEGENO_ACGT = "outputs/genotipo-AndigenaCCC-ClusterCall2020-ACGT.csv"
+OUTPUTFILEGENO_NUM  = "outputs/genotipo-AndigenaCCC-ClusterCall2020-MATRIX.csv"
+OUTPUTFILEMATRIX = "outputs/out-predictions-clusterCall2020-MATRIX-ALL.csv"
 
 #----------------------------------------------------------
 #----------------------------------------------------------
@@ -53,16 +59,16 @@ main <- function () {
 	trainPredictGenotypes (ratioThetasFile, training_thetaFiles, training_radioFiles, OUTPUTFILEMATRIX)
 	polyFilename = removeMonomorficMarkers (OUTPUTFILEMATRIX)
 	genoFilename = createGWASpolyGenotype (polyFilename, markersInfoFile)
-	removePrefixSolcapSnp (genoFilename, OUTPUTFILEGENO)
+	removePrefixSolcapSnp (genoFilename, OUTPUTFILEGENO_NUM)
 }
 
 #--------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------
-removePrefixSolcapSnp <- function (genoFilename, OUTPUTFILEGENO) {
+removePrefixSolcapSnp <- function (genoFilename, outputFile) {
 	geno = read.csv (genoFilename, check.names=F)
 	print (geno[1:5,1:5])
 	geno$Markers = gsub ("solcap_snp_","", geno$Markers)
-	write.csv (geno, OUTPUTFILEGENO, row.names=F, quote=F)
+	write.csv (geno, outputFile, row.names=F, quote=F)
 }
 
 #--------------------------------------------------------------------------------------------------------

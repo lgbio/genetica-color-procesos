@@ -12,8 +12,13 @@ warnings()
 # Create manhattan plots for top best markers and 
 #-------------------------------------------------------------
 
-INPUT = "inputs/SNPs-GSCORES-ALL-3TOOLS.csv"
-NBEST = 200              # 50 Best markers for each trait
+NBEST = 4634          # 4634 SNPs
+INPUT = "inputs/SNPs-GSCORES-ALL-3TOOLS.csv" # GWAS results for 4634 SNPs, 9 BASE TRAITS, 3 HCL TRAITS, 3 TOOLS 
+OUT_ALL_BASE  = "outputs/SNPs-GSCORES-3TOOLS-BEST-ALL-SNPs-BASE.csv" # Best 4634 SNPs for each base trait (42156 SNPs)
+OUT_ALL_HCL = "outputs/SNPs-GSCORES-3TOOLS-BEST-ALL-SNPs-HCL.csv"  # Best 3 HCL SNPs for each HCL trait (42156*3 SNPs)
+
+OUT_TOP_BASE  = "outputs/SNPs-GSCORES-3TOOLS-BEST-TOP-SNPs-BASE.csv" # Best 4634 SNPs for each base trait (42156 SNPs)
+OUT_TOP_HCL = "outputs/SNPs-GSCORES-3TOOLS-BEST-TOP-SNPs-HCL.csv"  # Best 3 HCL SNPs for each HCL trait (42156*3 SNPs)
 
 main <- function () {
     doAnalysis (INPUT)
@@ -22,22 +27,35 @@ main <- function () {
 doAnalysis <- function (inputData) {
     createDir ("outputs")
 #reload (pkgload::inst("gwascolors"))
-	#markersFile = "inouts/SNPs-GSCORES-ALL-ADDITIVE.csv"
 	markersFile = inputData
-	markersFile = addBaseTraits (markersFile)
 
-    # Best N
-	gw_bestMarkersTraits (markersFile, NBEST, "BASE")
+	# Add column with base trait name
+	markersFile = addBaseTraits (markersFile)                     #
+
+    # Best N for base traits
+	outFile = gw_bestMarkersTraits (markersFile, NBEST, "BASE")
+	file.symlink (basename (outFile), OUT_ALL_BASE)
+
+	# Best N for HCL traits
+	outFile = gw_bestMarkersTraits (markersFile, NBEST, "TRAIT")
+	file.symlink (basename (outFile), OUT_ALL_HCL)
 
     # Best one for plotting
-	bestOneFile = gw_bestMarkersTraits (markersFile, 1, "BASE")
-	plotBestSNPsByTrait (bestOneFile, "BASE")
+	outFile = gw_bestMarkersTraits (markersFile, 1, "BASE")
+	file.symlink (basename (outFile), OUT_TOP_BASE)
+	plotBestSNPsByTrait (outFile, "BASE")
 
-	# Best N
-	gw_bestMarkersTraits (markersFile, NBEST, "TRAIT")
     # Best one for Plotting
-	bestOneFile = gw_bestMarkersTraits (markersFile, 1, "TRAIT")
-	plotBestSNPsByTrait (bestOneFile, "TRAIT")
+	outFile = gw_bestMarkersTraits (markersFile, 1, "TRAIT")
+	file.symlink (basename (outFile), OUT_TOP_HCL)
+	plotBestSNPsByTrait (outFile, "TRAIT")
+
+	
+#	# Best 10 SNPs for 
+	outFile = gw_bestMarkersTraits (markersFile, 10, "BASE")
+	plotBestSNPsByTrait (outFile, "BASE")
+	outFile = gw_bestMarkersTraits (markersFile, 10, "TRAIT")
+	plotBestSNPsByTrait (outFile, "TRAIT")
     #-----------------------------------------------------------------------------
 
 	# Manhattan plot for top 1000 and labels for 20
@@ -45,21 +63,6 @@ doAnalysis <- function (inputData) {
 	gw_plotManhattanBestMarkers (topFile, N=20)
 
 	#gw_plotManhattanBestMarkers  (markersFile, N=20) 
-}
-
-#-------------------------------------------------------------
-# Add base trait from HCL trait
-#-------------------------------------------------------------
-addBaseTraits <- function (markersFile) {
-	message ("Adding base trait...", markersFile)
-	outFile = gsub (".csv", "-TRAITS.csv", markersFile)
-	markers    = read.csv (markersFile); #view (markers,m=0)
-	baseTraits = sapply (markers$TRAIT, function (x) strsplit (x, "[.]")[[1]][1])
-	markers    = cbind (BASE=baseTraits, markers)
-
-    outFile = gsub ("inputs", "outputs", outFile)
-	write.csv (markers, outFile, row.names=F)
-	return (outFile)
 }
 
 #-------------------------------------------------------------
@@ -92,14 +95,25 @@ gw_bestMarkersTraits <- function (markersFile, nBest, TRAITTYPE) {
 #		bestMarkers    = filter (uniqueMarkers, SIGNIFICANCE==T & GSCORE > GVALUE)
 #		bestMarkersTable = rbind (bestMarkersTable, bestMarkers)
 #	}
+	top_snps <- markers %>%
+	  # Group by Class (and Subclass if needed)
+	  group_by (!!sym(TRAITTYPE)) %>%
+	  # Sort by Score (descending) to prioritize high scores
+	  arrange(desc(GSCORE), .by_group = TRUE) %>%
+	  # Keep only distinct SNPs (no duplicates per group)
+	  distinct (SNP, .keep_all = TRUE) %>%
+	  # Slice the top N rows per group
+	  slice_head (n = nBest) %>%
+	  # Remove grouping (optional)
+	  ungroup()
 
-    bestMarkersTable = markers %>% 
-        group_by (!!sym(TRAITTYPE)) %>% 
-        slice_max (GSCORE, n=nBest, with_ties=F) %>% 
-        ungroup ()
+#    bestMarkersTable = markers %>% 
+#        group_by (!!sym(TRAITTYPE)) %>% 
+#        slice_max (GSCORE, n=nBest, with_ties=F) %>% 
+#        ungroup ()
 
     outFile = gsub ("inputs", "outputs", outFile)
-	write.csv (bestMarkersTable, outFile, row.names=F)
+	write.csv (top_snps, outFile, row.names=F)
 	return (outFile)
 }
 #-------------------------------------------------------------
@@ -219,6 +233,24 @@ plotBestSNPsByTrait <- function (markersFile, TRAITTYPE) {
     outFile = gsub ("inputs", "outputs", outFile)
 	ggsave (outFile, width=7, height=4)
 }
+
+#-------------------------------------------------------------
+# Add base trait from HCL trait
+#-------------------------------------------------------------
+addBaseTraits <- function (markersFile) {
+	message ("Adding base trait...", markersFile)
+	outFile = gsub (".csv", "-TRAITS.csv", markersFile)
+	markers    = read.csv (markersFile); #view (markers,m=0)
+	baseTraits = sapply (markers$TRAIT, function (x) strsplit (x, "[.]")[[1]][1])
+	markers    = cbind (BASE=baseTraits, markers)
+
+    outFile = gsub ("inputs", "outputs", outFile)
+	write.csv (markers, outFile, row.names=F)
+	return (outFile)
+}
+
+
+
 #-------------------------------------------------------------
 #-------------------------------------------------------------
 main()

@@ -1,0 +1,1 @@
+../14x-SeleccionGenomica-N-Marcadores/scripts/gs_plots_nMarkers-ORG.R

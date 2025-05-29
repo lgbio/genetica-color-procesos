@@ -1,0 +1,434 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{charter}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children no
+\language spanish
+\language_package default
+\inputencoding auto-legacy
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style swedish
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Analysis of Genomic Selection Variying Markers
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Section
+Material and Methods
+\end_layout
+
+\begin_layout Subsection
+Genotypic data
+\end_layout
+
+\begin_layout Subsection
+Phenotypic data
+\end_layout
+
+\begin_layout Subsection
+GWAS analysis
+\end_layout
+
+\begin_layout Subsection
+GP using marker densities
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+\strikeout on
+\color red
+To identify the optimal number of markers for predicting GEBVs for each LCH component of the color traits,
+ genomic prediction was performed using varying SNP densities.
+ Markers were selected based on GWAS results and ranked by importance using our custom GSCORE scoring function (see Section 2.3).
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Subsection
+GP using marker densities
+\end_layout
+
+\begin_layout Standard
+Genomic prediction was performed using marker subsets representing 5% to 100% of the total 4,641 SNPs.
+ Predictive ability,
+ assessed by the Pearson correlation between observed phenotypes and genomic estimated breeding values (GEBVs),
+ varied by trait and marker density (see Figure S4).
+\end_layout
+
+\begin_layout Standard
+In general,
+ predictive ability increased rapidly with marker density up to ~40–50% of the total set,
+ after which gains plateaued—
+indicating diminishing returns.
+ This pattern held across most color traits and LCH components (Hue,
+ Chroma,
+ Lightness),
+ suggesting that a moderate number of well-distributed,
+ informative SNPs can achieve predictive performance comparable to that of the full marker set.
+\end_layout
+
+\begin_layout Standard
+Stem color and primary flower color traits consistently showed higher predictive abilities,
+ with correlations nearing 0.75 at full marker density.
+ In contrast,
+ secondary traits—
+such as secondary tuber flesh or sprout color—
+showed lower predictive values,
+ even with more markers.
+ This variability reflects differences in genetic architecture,
+ with some traits likely controlled by major loci,
+ and others influenced by more polygenic and complex effects.
+\end_layout
+
+\begin_layout Standard
+These results support the feasibility of cost-effective genomic selection in tetraploid 
+\emph on
+Andigenum
+\emph default
+ potatoes using an optimized SNP subset.
+ The top 50% of markers,
+ selected via the GSCORE metric (Section 2.3),
+ effectively captured relevant genetic variation,
+ enabling accurate predictions while reducing computational demand.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/Suplementarias/FigS3-out-GS-crossval-varying-nmarkers-hcltraits.pdf
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\series bold
+GP comparison for LCH traits with subsets of markers resulting from the GWAS process
+\series default
+.
+ Each division corresponds to one of LCH component and within each division are the values corresponding to each trait.
+ On the vertical axis is the value of the prediction ability for each LCH component,
+ while on the horizontal axis are the number of markers of each subset with which the GEBV prediction was performed.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+ChatGpt Editting:
+\end_layout
+
+\begin_layout Standard
+To evaluate the efficiency of genomic prediction models across different SNP densities,
+ genomic selection (GS) was performed using subsets of markers representing 5%,
+ 10%,
+ 20%,
+ 30%,
+ 40%,
+ 50%,
+ 60%,
+ 70%,
+ 80%,
+ and 100% of the total 4,641 markers.
+ Predictive ability,
+ measured as the Pearson correlation between observed phenotypes and genomic estimated breeding values (GEBVs),
+ varied depending on the trait and the number of markers used.
+\end_layout
+
+\begin_layout Standard
+In general,
+ predictive ability increased rapidly with the inclusion of additional SNPs up to approximately 40–50% of the marker set.
+ Beyond this threshold,
+ the gains in predictive ability plateaued,
+ indicating diminishing returns with additional markers.
+ This trend was consistent across most color traits and LCH components (Hue,
+ Chroma,
+ and Lightness),
+ suggesting that a moderate number of well-distributed and informative SNPs can yield prediction accuracies comparable to those obtained using the complete marker set.
+\end_layout
+
+\begin_layout Standard
+Among the evaluated traits,
+ components of stem color and primary flower color consistently demonstrated higher predictive abilities,
+ with correlations reaching values close to 0.75 when using 100% of the markers.
+ In contrast,
+ secondary traits,
+ such as the secondary tuber flesh or sprout colors,
+ exhibited lower predictive values even at higher marker densities.
+ These results indicate variability in the genetic architecture of the color traits,
+ where some traits are likely controlled by fewer loci with larger effects,
+ while others may be more polygenic and influenced by complex interactions.
+\end_layout
+
+\begin_layout Standard
+Overall,
+ these findings highlight the potential for cost-effective genomic selection in tetraploid Andigenum potatoes by utilizing an optimized number of markers.
+ The top 50 SNPs,
+ selected via our GSCORE metric (Section 2.3),
+ captured sufficient genetic architecture.
+ This approach allows for improved selection accuracy without the computational burden of using the entire marker set.
+\end_layout
+
+\begin_layout Section
+DeepSeek Edditing:
+\end_layout
+
+\begin_layout Standard
+We evaluated the predictive ability of genomic selection (GS) for 27 Hue-Chroma-Lightness (HCL) traits derived from nine color characteristics in tetraploid Andigenum potatoes.
+ Using the BWGS pipeline (Charmet et al.,
+ 2020),
+ we implemented 12 GS models spanning parametric (GBLUP,
+ EGBLUP,
+ RR-BLUP,
+ LASSO),
+ semiparametric (RKHS,
+ Random Forest,
+ SVM),
+ and Bayesian approaches (BRR,
+ BL,
+ BA,
+ BB,
+ BC).
+ Five-fold cross-validation repeated five times was employed to assess model performance.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Key findings:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Full Marker Set Performance (4,641 SNPs):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Predictive abilities (correlation between observed and predicted values) varied substantially among traits (Figure 5B).
+ Primary flower color (PCFlower) and stem color (StemC) showed the highest predictive abilities (0.86 and 0.75,
+ respectively),
+ while secondary tuber flesh color (SCTuberflesh) had the lowest (0.18).
+\end_layout
+
+\begin_layout Itemize
+The RKHS model outperformed others for 11/27 HCL components,
+ followed by EGBLUP (9/27) and SVM (5/27).
+ Bayesian models showed particular effectiveness for traits with complex inheritance patterns.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Optimization of Marker Number:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Analysis of progressively reduced marker sets (100,
+ 50,
+ 35,
+ 15,
+ and 5 top-ranked SNPs) revealed that predictive ability plateaued at ~50 markers for most traits (Supplementary Figure S3).
+ Notably:
+\end_layout
+
+\begin_layout Itemize
+Primary tuber skin color (PCTuberskin) maintained 92% of full-set predictive ability with just 50 markers
+\end_layout
+
+\begin_layout Itemize
+Secondary sprout color (SCSprout) required 100 markers to reach maximum performance
+\end_layout
+
+\begin_layout Itemize
+The top 50 SNPs,
+ selected via our GSCORE metric (Section 2.3),
+ captured sufficient genetic architecture while reducing computational load by 98.9%.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Trait Architecture Insights:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Traits with highest predictive abilities (PCFlower,
+ StemC) also exhibited the highest narrow-sense heritabilities (h² > 0.8,
+ Figure 5A),
+ suggesting predominantly additive genetic control.
+\end_layout
+
+\begin_layout Itemize
+Poorly predicted traits (e.g.,
+ SCTuberflesh) showed lower heritability (h² = 0.42) and higher environmental influence,
+ consistent with their weaker GWAS signals.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Component-Specific Patterns:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Hue (H) components were generally more predictable than Chroma (C) or Lightness (L),
+ with mean predictive abilities of 0.61 vs.
+ 0.49 and 0.47,
+ respectively.
+ This aligns with known biochemical pathways where hue variation strongly reflects anthocyanin and carotenoid content.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\series bold
+Breeding Implications:
+\end_layout
+
+\begin_layout Standard
+The demonstrated efficacy of GS with reduced marker sets (50-100 SNPs) enables cost-effective implementation in Andigenum potato breeding programs.
+ Our results suggest:
+\end_layout
+
+\begin_layout Itemize
+Early-generation selection for highly heritable traits (flower/stem color) can achieve accuracy >0.75
+\end_layout
+
+\begin_layout Itemize
+Secondary color traits may require phenotypic validation despite genomic predictions
+\end_layout
+
+\begin_layout Itemize
+The RKHS model is recommended as default for HCL trait prediction,
+ with EGBLUP for hue-related components
+\end_layout
+
+\end_body
+\end_document

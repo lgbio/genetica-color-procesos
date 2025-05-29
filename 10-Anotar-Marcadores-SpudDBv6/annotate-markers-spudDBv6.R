@@ -25,13 +25,12 @@ library (stringi)
 library (dplyr)
 warnings()
 
-INPUT_01 = "inputs/SNPs-GSCORES-ALL-3TOOLS-TRAITS-BASE.csv"
-INPUT_02 = "inputs/SNPs-GSCORES-ALL-3TOOLS-TRAITS-HCL.csv"
+#INPUT_01 = "inputs/SNPs-GSCORES-3TOOLS-BEST-ALL-SNPs-BASE.csv"
+INPUT_01 = "inputs/SNPs-GSCORES-ALL-3TOOLS-TRAITS.csv"
 createDir ("outputs")
 
 main <- function () {
     doAnnotation (INPUT_01)
-    doAnnotation (INPUT_02)
 }
 
 doAnnotation <- function (inputFile) {
@@ -45,29 +44,31 @@ doAnnotation <- function (inputFile) {
 
     markersScores = read.csv (markersFile); #view (markersScores)
 
-    N             = nrow (markersScores)
     outFile       = gsub (".csv", "-SPUDDB6_1.csv", markersFile)
 
     markersScores = markersScores %>% distinct (SNP, .keep_all=T)
-    markersScores = markersScores [1:50,]
+    #markersScores = markersScores [1:50,]
+	view (markersScores)
     markersMap    = read.csv (markersMap, sep="\t"); #view (markersMap)
 
     message (">>> Joining markersScores and markersMap...")
-    markersScores = markersScores [, c ("GSCORE", "SNP", "TRAIT", "SIGNIFICANCE"), drop=F]
+    markersScores = markersScores [, c ("GSCORE", "SNP", "CHR", "TRAIT", "SIGNIFICANCE"), drop=F]
     markersMap = markersMap [!duplicated (markersMap$SNP_ID), c("SNP_ID", "REF", "SNP_POS")]
     markersMap$SNP_ID = gsub ("solcap_snp_", "", markersMap$SNP_ID);#view (markersMap)
 
-    markers = merge (markersScores, markersMap, by.x="SNP", by.y="SNP_ID", all.x=T, sort=F); #view (markers)
+    markers = merge (markersScores, markersMap, by.x="SNP", by.y="SNP_ID", all.x=T, all.y=F, sort=F); #view (markers)
 
     message (">>> Joining markers with genes...")
     library (sqldf)
-    genes         = read.csv (genesFile, sep="\t", header=F); #view (genes)
-    names (genes) = c ("SCAFFOLD", "MSU", "TYPE", "INI", "END", "NONE1", "STRAND", "NONE2", "INFO"); #view (genes)
-    genesmRNA = genes [genes$TYPE=="mRNA",]; #view (genesmRNA)
 
-    markersGenes = sqldf ("SELECT GSCORE, SNP, TRAIT, SIGNIFICANCE, REF, SNP_POS, INI, END, INFO
-                           FROM markers
-                           LEFT JOIN genesmRNA ON SNP_POS BETWEEN INI and END")
+	# get mRNA genes, change chrXX for XX, remove SCAFFOLDs
+	genesmRNA = processGeneFile (genesFile) 
+	view (genesmRNA)
+
+    markersGenes = sqldf ("SELECT GSCORE, SNP, TRAIT, SIGNIFICANCE, REF, SNP_POS, CHR, INI, END, INFO
+                           FROM markers LEFT JOIN genesmRNA 
+						   	ON SNP_POS BETWEEN INI and END
+							AND CHR = genesmRNA.SCAFFOLD")
     SEQID = sapply  (strsplit (markersGenes$INFO, ";"), function (x) gsub ("ID=", "", x[[1]]))
     #view (SEQID)
     markersGenesIds = cbind (markersGenes, SEQID=SEQID); #view (markersGenesIds)
@@ -152,7 +153,8 @@ doAnnotation <- function (inputFile) {
 
     # Create summary table
     summCols = c("GSCORE", "SNP", "CHROM", "POS", "TRAIT", "ANNOT")
-    summTable = snpsdf [1:N,summCols]
+
+    summTable = snpsdf [,summCols]
     selFirst <- function (x) {
         strsplit (x,"[|]")[[1]][1]
     }
@@ -161,6 +163,20 @@ doAnnotation <- function (inputFile) {
     summFile = gsub ("inputs", "outputs", summFile)
     write.csv (summTable, summFile, row.names=F)
 }
+
+#--------------------------------------------------
+# Rename columns, change CHR notation, get mRNA rows
+#--------------------------------------------------
+processGeneFile <- function (genesFile) {
+    genes         = read.csv (genesFile, sep="\t", header=F); #view (genes)
+    names (genes) = c ("SCAFFOLD", "MSU", "TYPE", "INI", "END", "NONE1", "STRAND", "NONE2", "INFO"); #view (genes)
+	genes$SCAFFOLD = as.integer (sub ("^chr", "", genes$SCAFFOLD))
+	genes = genes [!is.na (genes$SCAFFOLD), ]
+    genesmRNA      = genes [genes$TYPE=="mRNA",]; #view (genesmRNA)
+	return (genesmRNA)
+}
+
+
 #--------------------------------------------------
 #--------------------------------------------------
 main ()

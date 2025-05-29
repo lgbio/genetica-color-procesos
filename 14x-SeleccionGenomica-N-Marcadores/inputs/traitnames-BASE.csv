@@ -1,0 +1,10 @@
+SpanishName, EnglishName, Description
+CPFlor, PCFlower, primary flower color
+CPBrote, PCSprout, primary sprout color
+CSTuber, SCTuberskin, secondary tuber skin color
+CSBrote, SCSprout, secondary sprout color
+CSPulpa, SCTuberflesh, secondary tuber flesh color
+CPTuber, PCTuberskin, primary tuber skin color
+CTallo, StemC, stem color
+CBaya, BerryC, berry color
+CPulpa, PCTuberflesh, primary tuber flesh color

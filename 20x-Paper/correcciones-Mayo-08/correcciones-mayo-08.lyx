@@ -1,0 +1,180 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language spanish
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Correcciones Paper - Mayo 08
+\end_layout
+
+\begin_layout Standard
+Comentarios Jhon - 
+\end_layout
+
+\begin_layout Section
+Filtros
+\end_layout
+
+\begin_layout Standard
+Pág.
+ 2 habla de los filtros:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename image-filters-text.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Modelos Usados por MultiGWAS
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename image-MultiGWAS-models.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An analysis was conducted to explore associations between potato LCH traits and genomic regions for both additive and dominant effects.
+ We used MultiGWAS (Garreta et al.,
+ 2021),
+ a tool that integrates results from three GWAS methods:
+ GWASpoly (Rosyara et al.,
+ 2016) for tetraploid genotypes,
+ and GAPIT (Tang et al.,
+ 2016) and TASSEL (Bradbury et al.,
+ 2007) for diploid genotypes.
+ The analysis employed the MultiGWAS Full Model (Q+K model),
+ which accounts for population structure (Q,
+ typically PCA-derived) and kinship relationships (K,
+ from a genetic relatedness matrix) to mitigate false positives.
+\end_layout
+
+\begin_layout Standard
+In MultiGWAS,
+ each tool implements a mixed linear model (MLM) (Phenotype ~ Genotype + Q + K) but with method-specific adjustments.
+ GWASpoly adapts the MLM for polyploid data,
+ incorporating population structure and kinship as fixed and random effects,
+ respectively.
+ GAPIT employs a standard MLM,
+ treating population structure (Q) as a fixed effect (e.g.,
+ from PCA) and kinship (K) as a random effect via its kinship matrix.
+ Meanwhile,
+ TASSEL fits the MLM using its conventional algorithm,
+ where both Q (structure) and K (kinship) are included as covariates.
+ By unifying these approaches,
+ MultiGWAS robustly controls for population stratification and relatedness while detecting marker-trait associations across ploidy levels (diploid and tetraploid).
+\end_layout
+
+\begin_layout Section
+Revisar anotación,
+ 
+\end_layout
+
+\begin_layout Section
+Figura de subsets
+\end_layout
+
+\begin_layout Itemize
+Tabla con el valor final y algunas valores intermedios,
+ 
+\end_layout
+
+\begin_layout Itemize
+figura habilidad predictiva 50 marcadores vs todos
+\end_layout
+
+\end_body
+\end_document

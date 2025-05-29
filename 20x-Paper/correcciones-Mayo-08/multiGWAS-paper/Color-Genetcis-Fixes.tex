@@ -1,0 +1,72 @@
+%% LyX 2.4.0~RC3 created this file.  For more info, see https://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage[bookmarks=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\documentclass[11pt,twocolumn]{article}
+
+\usepackage{listings}% To show when calling multiGWAS from console
+\usepackage{hyphenat}
+% For writhing p-values
+\newcommand{\mathA}[1]{{\operatorname{#1}}}
+\newcommand{\mathB}[1]{{\operatorname{\mathit{#1}}}}
+\renewcommand{\textrightarrow}{$\rightarrow$}
+% Small fonts in figure captions
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\hyphenation{GWAS-poly tetra-ploid}
+%---------------------------------------------------
+%Temporal package
+\newcommand{\blue}[1]{{\textcolor{blue}{#1}}}
+%---------------------------------------------------
+\usepackage{authblk}
+\usepackage{lineno}
+\usepackage{listings}
+\linenumbers
+
+%---- For comments
+\usepackage[colorinlistoftodos]{todonotes}
+\setlength{\marginparwidth}{4.3cm}
+\newcommand{\lc}[1]{\todo[size=\small,color=red!20!white]{#1}}
+\newcommand{\ic}[1]{\todo[size=\small,color=green!20!white]{#1}}
+\newcommand{\pr}[1]{\todo[size=\small,color=blue!20!white]{#1}}
+\newcommand{\comment}[1]{}
+%----For Listings (Steps simulation) ---------------
+% Change algorith for Schema
+\usepackage{algorithm}
+
+\renewcommand{\ALG@name}{Listing}
+ 
+%----For reducing spaces in enumerates of simulation schema 
+\usepackage{enumitem}
+\setlist[enumerate]{topsep=-2pt,itemsep=-1ex,partopsep=0.8ex,parsep=1ex}
+
+%----For References ---------------
+% PAULA
+
+
+%---------------------------------------------
+
+\makeatother
+
+\usepackage[style=apa,backend=bibtex8,backend=biber]{biblatex}
+\addbibresource{Color-Genetcis-Fixes.bib}
+\begin{document}
+\title{Potato Color Genetics}
+\maketitle
+
+\subsection{2.1 Genotypic data}
+
+....
+
+To ensure data quality and reliability for subsequent GWAS analysis, standard filtering criteria were applied. SNPs with a minor allele frequency (MAF) below 1\% were excluded to eliminate rare variants that may lead to spurious associations due to insufficient statistical power (\cite{Anderson2010}). Individuals with a genotype call missing rate (MIND) greater than 10\% were removed to avoid bias introduced by low-quality samples. SNPs with a missing rate (GENO) above 10\% were filtered out to maintain marker integrity and reduce imputation noise. Additionally, SNPs with Hardy-Weinberg equilibrium (HWE) p-values below 1e-10 were excluded, as extreme deviations may indicate genotyping errors, population structure artifacts, or selection (\cite{Wigginton2005}).  These thresholds are commonly used in polyploid GWAS studies and are consistent with established quality control practices (\cite{Lu2013}; \cite{Pavan2020}).
+
+\printbibliography
+
+\end{document}

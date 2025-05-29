@@ -1,0 +1,219 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+%\documentclass[11pt,twocolumn]{article}
+
+\usepackage{listings}% To show when calling multiGWAS from console
+\usepackage{hyphenat}
+% For writhing p-values
+\newcommand{\mathA}[1]{{\operatorname{#1}}}
+\newcommand{\mathB}[1]{{\operatorname{\mathit{#1}}}}
+\renewcommand{\textrightarrow}{$\rightarrow$}
+% Small fonts in figure captions
+\usepackage[font=scriptsize,labelfont=bf]{caption}
+\hyphenation{GWAS-poly tetra-ploid}
+%---------------------------------------------------
+%Temporal package
+\newcommand{\blue}[1]{{\textcolor{blue}{#1}}}
+%---------------------------------------------------
+\usepackage{authblk}
+\usepackage{lineno}
+\usepackage{listings}
+\linenumbers
+
+%---- For comments
+\usepackage[colorinlistoftodos]{todonotes}
+\setlength{\marginparwidth}{4.3cm}
+\newcommand{\lc}[1]{\todo[size=\small,color=red!20!white]{#1}}
+\newcommand{\ic}[1]{\todo[size=\small,color=green!20!white]{#1}}
+\newcommand{\pr}[1]{\todo[size=\small,color=blue!20!white]{#1}}
+\newcommand{\comment}[1]{}
+%----For Listings (Steps simulation) ---------------
+% Change algorith for Schema
+\usepackage{algorithm}
+
+\renewcommand{\ALG@name}{Listing}
+ 
+%----For reducing spaces in enumerates of simulation schema 
+\usepackage{enumitem}
+\setlist[enumerate]{topsep=-2pt,itemsep=-1ex,partopsep=0.8ex,parsep=1ex}
+
+%----For References ---------------
+% PAULA
+
+
+%---------------------------------------------
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding auto-legacy
+\fontencoding T1
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblio_style plainnat
+\biblio_options backend=biber
+\biblatex_bibstyle apa
+\biblatex_citestyle apa
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Potato Color Genetics
+\end_layout
+
+\begin_layout Subsection
+2.1 Genotypic data
+\end_layout
+
+\begin_layout Standard
+....
+\end_layout
+
+\begin_layout Standard
+To ensure data quality and reliability for downstream GWAS analysis,
+ standard filtering criteria were applied.
+ SNPs with a minor allele frequency (MAF) below 1% were excluded to eliminate rare variants that may lead to spurious associations due to insufficient statistical power (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Anderson2010"
+literal "false"
+
+\end_inset
+
+).
+ Individuals with a genotype call missing rate (MIND) greater than 10% were removed to avoid bias introduced by low-quality samples.
+ SNPs with a missing rate (GENO) above 10% were filtered out to maintain marker integrity and reduce imputation noise.
+ Additionally,
+ SNPs with Hardy-Weinberg equilibrium (HWE) p-values below 1e-10 were excluded,
+ as extreme deviations may indicate genotyping errors,
+ population structure artifacts,
+ or selection (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wigginton2005"
+literal "false"
+
+\end_inset
+
+).
+ These thresholds are commonly used in polyploid GWAS studies and are consistent with established quality control practices (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lu2013"
+literal "false"
+
+\end_inset
+
+;
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pavan2020"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "Color-Genetcis-Fixes"
+encoding "default"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

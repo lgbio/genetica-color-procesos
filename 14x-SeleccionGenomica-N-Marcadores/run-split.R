@@ -1,0 +1,1 @@
+/home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores/scripts/run-split.R
