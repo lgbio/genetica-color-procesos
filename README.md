@@ -1,8 +1,9 @@
 # Pasos y scripts del trabajo con AGROSAVIA de genética del color en papa.
 
 ## LOG
-May/29: r0.33 : Working on heritabiliy
+Jun/22: r0.34 : Improved Heritability and Genomic Selection Full. Plots Spanish.
 
+May/29: r0.33 : Working on heritabiliy
 May/08: r0.32 : Cloning to KLinux for Paper revision
 
 Mar/28: r0.31 : Filtrado dos traits en Plots de variación de marcadores. Cambiado background a blanco

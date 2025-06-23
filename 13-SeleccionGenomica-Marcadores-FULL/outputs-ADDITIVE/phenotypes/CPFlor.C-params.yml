@@ -1,9 +1,0 @@
-trainingGenoFile  : training-geno-TRAINING.csv
-trainingPhenoFile : phenotypes/CPFlor.C-trainingPheno.csv
-targetGenoFile    : target-geno-TARGET.csv
-targetPhenoFile   : phenotypes/CPFlor.C-targetPheno.csv
-phenoName         : CPFlor.C
-methods           : BA BB
-nTimes            : 1
-nFolds            : 2
-nCores            : 3

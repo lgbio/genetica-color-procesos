@@ -1,0 +1,1 @@
+/home/lg/BIO/agrosavia/genetica-color-papa/12-Calcular-heredabilidad-AllTraits/gs_plotsHCL_20.R

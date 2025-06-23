@@ -1,9 +1,0 @@
-trainingGenoFile  : training-geno-TRAINING.csv
-trainingPhenoFile : phenotypes/CPBrote.L-trainingPheno.csv
-targetGenoFile    : target-geno-TARGET.csv
-targetPhenoFile   : phenotypes/CPBrote.L-targetPheno.csv
-phenoName         : CPBrote.L
-methods           : BA BB
-nTimes            : 1
-nFolds            : 2
-nCores            : 3

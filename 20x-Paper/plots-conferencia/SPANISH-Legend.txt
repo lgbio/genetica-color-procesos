@@ -1,0 +1,12 @@
+Heredabilidad y capacidad predictiva de los rasgos de LCH. Cada diagrama de caja corresponde a uno de los 21 
+componentes del rasgo de color de LCH en el grupo Solanum tuberosum Andigenum. Los rasgos se agrupan por 
+característica de color (p. ej., flor, brote, piel, tallo) y por componente (Croma: C, Tono: H, Luminosidad: L). i
+
+A. Distribuciones posteriores de la heredabilidad en sentido estricto (h2), estimadas mediante la regresión 
+bayesiana de cresta (BRR) con 15 000 iteraciones, 5000 burn-in y un thinning cada 5 pasos. Las medianas posteriores 
+se indican sobre cada caja.  
+
+B. Capacidad predictiva de siete modelos de predicción genómica. Los valores representan la correlación entre 
+los fenotipos observados y los GEBV a través de una validación cruzada repetida de 5 pasos. La capacidad predictiva 
+media se muestra encima de cada diagrama de caja, y el modelo que logra el mejor rendimiento por rasgo 
+se indica debajo.

@@ -1,9 +1,0 @@
-trainingGenoFile  : training-geno-TRAINING.csv
-trainingPhenoFile : phenotypes/CBaya.H-trainingPheno.csv
-targetGenoFile    : target-geno-TARGET.csv
-targetPhenoFile   : phenotypes/CBaya.H-targetPheno.csv
-phenoName         : CBaya.H
-methods           : BA BB
-nTimes            : 1
-nFolds            : 2
-nCores            : 3

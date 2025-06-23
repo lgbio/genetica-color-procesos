@@ -9,11 +9,6 @@ source(file.path(Sys.getenv("RENV_PROJECT"), "renv/activate.R"))
 #------------ Running parameters -----------------------------
 NCORES = 8
 DEBUG  = FALSE
-if (DEBUG == FALSE) {
-	INPUTSDIR="inputs/"			  # Real training dir
-}else {  # Only for testing
-	INPUTSDIR="inputs-test/"	 # Toy datasets, only for testing the script
-}
 
 #----------- Model Parameters --------------------------------
 NITER    = 15000
@@ -21,12 +16,6 @@ BURNIN   = 5000
 THIN     = 5
 VERBOSE  = FALSE
 MODEL    = "BRR"      # BRR, BayesA, RKHS
-
-ADDVARFILESUFFIX = switch (MODEL,
-		BayesA = "ScaleBayesA.dat",
-		BRR    = "varB.dat",
-		RKHS   = "varU.dat"
-		)
 
 #-------------------------------------------------------------
 # Main only for testing
@@ -40,28 +29,86 @@ main <-  function() {
 	library (parallel)
 	library (ggplot2)
 	library (dplyr)
-	library(AGHmatrix)
+	library (AGHmatrix)
 
+	INPUTSDIR        = ifelse (!DEBUG, "inputs/", "inputs-test/")
+	PREVIOUSHCLTABLE = "inputs/outvar-BRR/out-Heritability-HCL-Comparison-TABLE-BRR.csv"     # Previous calculated vars
 	phenotypesFile	 = paste0 (INPUTSDIR, "fenotiposColor-ComponentesLCH.csv")
 	genotypeFile	 = paste0 (INPUTSDIR, "genotipo-AndigenaCCC-ClusterCall2020-MATRIX.csv")
-	outputDir		 = paste0 ("outputs-", MODEL)
+	englishNamesFile = paste0 (INPUTSDIR, "traitnames-BASE.csv")
+	OUTPUTDIR		 = paste0 ("outputs-", MODEL)
 
-	hclTableFilename = gs_heritability (genotypeFile, phenotypesFile, outputDir)
-    plotHeritabilities (hclTableFilename, outputDir)
+	hclTableFilename    = gs_heritability (genotypeFile, phenotypesFile, OUTPUTDIR, PREVIOUSHCLTABLE)
+	hclTableFilename_SPANISH = hclTablePreprocessing (hclTableFilename, englishNamesFile, OUTPUTDIR, "SPANISH")
+	gs_plotsHCL (hclTableFilename_SPANISH, OUTPUTDIR, "Componentes_CHL",  "Heredabilidad",
+				 "Heredabilidad para los 21 componentes de color CHL")
+
+	hclTableFilename_ENGLISH = hclTablePreprocessing (hclTableFilename, englishNamesFile, OUTPUTDIR, "ENGLISH")
+	gs_plotsHCL (hclTableFilename_ENGLISH, OUTPUTDIR, "CHL_Components", "Heritability", 
+				 "Heritability for the 21 CHL Components")
+
 }
 
 #--------------------------------------------------------------------------------
+# Change to english names, remove two traits
 #--------------------------------------------------------------------------------
-gs_heritability <- function (genoFile, phenosFile, outputDir) {
+hclTablePreprocessing <- function (hclTableFilename, englishNamesFile, outputDir, outType) {
+	mappings <- read.csv (englishNamesFile) # Load the name mappings
+  
+	df <- read.csv (hclTableFilename)       # Load the target table
+
+  	# Remove specific traits
+	`%notin%` <- Negate(`%in%`)
+	view (df)
+	if (outType == "SPANISH") {
+		df <- df %>% filter(Prefix %notin% c('CBaya', 'CPulpa'))
+		names(df)[names(df) %in% c("HCL_component", "Heritability")] <- c("Componentes_CHL", "Heredabilidad") # Rename columns "a" and "b" to "x" and "y"
+	}else if (outType == "ENGLISH") {
+		df <- df %>% filter(Prefix %notin% c('BerryC', 'PCTuberflesh'))
+		names(df)[names(df) %in% c("HCL_component", "Heritability")] <- c("CHL_Components", "Heritability") # Rename columns "a" and "b" to "x" and "y"
+	}
+
+	view (df)
+
+	# Apply gsub replacements to all values
+	if (outType == "ENGLISH") {
+		for (i in seq_len(nrow(mappings))) {
+		  df[] <- lapply(df, function(col) {
+			gsub(
+			  mappings$SpanishName[i],
+			  mappings$EnglishName[i],
+			  col,
+			  ignore.case = TRUE
+			)
+		  })
+		}  
+	}
+ 
+	# Save the new table
+	output_filename <- file.path (outputDir, addLabel (basename (hclTableFilename), outType))
+	write.csv (df, output_filename , quote=F, row.names=F)
+	return (output_filename)
+}
+#--------------------------------------------------------------------------------
+# Calculates heritability for multitrait file 
+# It calls the heritability function
+#--------------------------------------------------------------------------------
+gs_heritability <- function (genoFile, phenosFile, outputDir, PREVIOUSHCLTABLE) {
+	# Run with previous results
+	message (">>> Calculating heritabilities...")
+	createDir (outputDir)
+	createDir (sprintf ("%s/tmp", outputDir))
+
+	if (PREVIOUSHCLTABLE != "") 
+		return (PREVIOUSHCLTABLE)
+
+	# Run full process
 	data	   = readProcessGenoPheno (genoFile, phenosFile)
 	geno	   = data$geno
 	view (geno)
 	pheno	   = data$pheno 
 	traitNames = colnames (pheno)
 
-	message (">>> Calculating heritabilities...")
-	#createDir (outputDir)
-	#createDir (sprintf ("%s/tmp", outputDir))
 
 	GmatrixPoly = calculate_Gmatrix (geno)
 	view (GmatrixPoly)
@@ -73,19 +120,14 @@ gs_heritability <- function (genoFile, phenosFile, outputDir) {
 }
 
 #--------------------------------------------------------------------------------
+# Calculate heritability for a single trait
 #--------------------------------------------------------------------------------
 heritabilityPolyTrait <- function (traitName, geno, pheno, GmatrixPoly, outputDir) {
-	# Output dirs and filenames
-	OUTFILEPREFIX   = paste0 (outputDir, "/tmp/", MODEL, "-", traitName,"-")
-	additiveVarFile = paste0 (OUTFILEPREFIX, "ETA_1_", ADDVARFILESUFFIX)    # Additive variance for RKHS
-	residualVarFile = paste0 (OUTFILEPREFIX, "varE.dat")          # Residual variance for RKHS
+	# Load previous results, if these exists (runs)
+	previousResults = loadPreviousResults (traitName)
+	if (previousResults != NULL)
+		return (previousResults)
 
-	if (file.exists (additiveVarFile) && file.exists (residualVarFile)) {
-		var_additive = scan(additiveVarFile)
-		var_residual = scan(residualVarFile)
-		h2_narrow    = var_additive / (var_additive + var_residual)
-		return (h2_narrow)
-	}
 		
 	# Extract the phenotype column (e.g., 'CTallo.L') and assign IDs from 'Registro'
 	phenoVector = pheno [, traitName]
@@ -98,7 +140,7 @@ heritabilityPolyTrait <- function (traitName, geno, pheno, GmatrixPoly, outputDi
 	}
 
 	fit <- BGLR( y = phenoVector, ETA = ETA,
-	  nIter = NITER, burnIn = BURNIN, thin = THIN , verbose = VERBOSE, saveAt = OUTFILEPREFIX 
+	  nIter = NITER, burnIn = BURNIN, thin = THIN , verbose = VERBOSE, saveAt = OUTPUTDIR 
 	)
 
 	var_additive = scan(additiveVarFile)
@@ -108,6 +150,35 @@ heritabilityPolyTrait <- function (traitName, geno, pheno, GmatrixPoly, outputDi
 	return (h2_narrow)
 }
 
+#--------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
+loadPreviousResults <- function (traitName) {
+	if (OUTVARSDIR == "")
+		return (NULL)
+
+	#---------- Output files according to Model ------------------
+	ADDVARFILESUFFIX = switch (MODEL,
+			BayesA = "ScaleBayesA.dat",
+			BRR    = "varB.dat",
+			RKHS   = "varU.dat"
+	)
+
+	# Output dirs and filenames
+	VARSFILEPREFIX  = sprintf ("%s/outVars-%s/%s-%s-",  OUTVARSDIR, MODEL, MODEL,  traitName)
+	additiveVarFile = paste0 (VARSFILEPREFIX, "ETA_1_", ADDVARFILESUFFIX)    # Additive variance for RKHS
+	residualVarFile = paste0 (VARSFILEPREFIX, "varE.dat")                    # Residual variance for RKHS
+
+	# Load previous results, if these exists (runs)
+	if (file.exists (additiveVarFile) && file.exists (residualVarFile)) {
+		var_additive = scan(additiveVarFile)
+		var_residual = scan(residualVarFile)
+		h2_narrow    = var_additive / (var_additive + var_residual)
+		return (h2_narrow)
+	}
+	message ("+++ Previous vars filenames not found!!")
+	quit ()
+}
+	
 #--------------------------------------------------------------------------------
 # Assuming your genotype data is `genotype_matrix_0_4` (individuals x markers)
 # coded as 0, 1, 2, 3, 4 for a tetraploid.
@@ -154,6 +225,7 @@ createHCLTable <- function (traitNames, h2Results, outputDir) {
 # Plot heritabilities dot, bar, and boxes
 #-------------------------------------------------------------
 plotHeritabilities <- function (hclTableFilename, outputDir) {
+	print (hclTableFilename)
     # Bar Plot (Recommended for Clarity)
 
     # Assuming your data is in a data frame called 'data'
@@ -168,8 +240,8 @@ plotHeritabilities <- function (hclTableFilename, outputDir) {
       labs(title = "Heritability of Traits", x = "Traits", y = "Heritability") +
       theme_minimal()
 
-	outPlotname   = gsub ("TABLE.csv", "PLOT-BAR.pdf", hclTableFilename)
-	ggsave (outPlotname, width=11)
+	outPlotname   = file.path (outputDir, gsub (".csv", ".pdf", basename (hclTableFilename)))
+	ggsave (addLabel (outPlotname, "BAR"), width=11)
 
     # Saving Dot Plot to PDF
     dot_plot <- ggplot(data, aes(x = reorder(Traits, Heritability), y = Heritability)) +
@@ -178,8 +250,7 @@ plotHeritabilities <- function (hclTableFilename, outputDir) {
       labs(title = "Heritability of Traits", x = "Traits", y = "Heritability") +
       theme_minimal()
 
-	outPlotname   = gsub ("TABLE.csv", "PLOT-DOT.pdf", hclTableFilename)
-	ggsave (outPlotname, width=11)
+	ggsave (addLabel (outPlotname, "DOT"), width=11)
 
     # Saving boxplots to PDF
 	gs_plotsHCL (hclTableFilename, outputDir, "Heritability", 

@@ -1,0 +1,8 @@
+Heritability and Predictive Ability for LCH Traits. Each boxplot corresponds to one of the 21 LCH
+color trait components in Solanum tuberosum Andigenum group. Traits are grouped by color feature (e.g.,
+flower, sprout, skin, stem) and by component (Chroma: C, Hue: H, Lightness: L). A. Posterior distribu-
+tions of narrow-sense heritability (h2), estimated using Bayesian Ridge Regression (BRR) with 15,000
+iterations, 5,000 burn-in, and thinning every 5 steps. Posterior medians are annotated above each box.
+B. Predictive abilities of seven genomic prediction models. Values represent the correlation between
+observed phenotypes and GEBVs across repeated 5-fold cross-validation. The mean predictive ability is
+shown above each boxplot, and the model achieving the best performance per trait is indicated below.

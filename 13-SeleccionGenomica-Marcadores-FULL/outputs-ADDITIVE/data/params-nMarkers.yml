@@ -1,0 +1,10 @@
+trainingGenoFile    	: /home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores/datasets/training-geno.csv
+trainingPhenoFile   	: /home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores/datasets/training-pheno.csv
+targetGenoFile      	: /home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores/datasets/target-geno.csv
+targetPhenoFile     	: /home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores/datasets/target-pheno.csv
+markersFile         	: /home/lg/BIO/agrosavia/genetica-color-papa/14x-SeleccionGenomica-N-Marcadores/datasets/best-gwas-markers.csv
+nMarkers			: 100
+methods             : BA BB BC BL BRR GBLUP RKHS
+nTimes              : 5 #5 
+nFolds              : 5 #5 
+nCores              : 2 # Number of processing cores

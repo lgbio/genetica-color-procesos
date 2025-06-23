@@ -1,9 +1,0 @@
-trainingGenoFile  : training-geno-TRAINING.csv
-trainingPhenoFile : phenotypes/Baya.C-trainingPheno.csv
-targetGenoFile    : target-geno-TARGET.csv
-targetPhenoFile   : phenotypes/Baya.C-targetPheno.csv
-phenoName         : Baya.C
-methods           : BA BB BC BL BRR GBLUP EGBLUP RKHS LASSO RR SVM RF
-nTimes            : 5
-nFolds            : 5
-nCores            : 4
